@@ -1,0 +1,13 @@
+{
+  "name": "Welcome Message Plugin",
+  "uniqueName": "welcome_message_plugin",
+  "description": "Sends a personalized welcome message to new community members.",
+  "triggers": ["membership-join"],
+  "permissions": ["read:space-data"],
+  "outcomes": ["write:messages"],
+  "tags": ["community", "room", "membership"],
+  "projectStage": "early",
+  "author": "waivlength-core",
+  "version": "1.0.0",
+  "documentation_url": "https://github.com/Waivlength-io/waivlength-sdk/internal-plugins/welcome_message_plugin/README.md"
+}
