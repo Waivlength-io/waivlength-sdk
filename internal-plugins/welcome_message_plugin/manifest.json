@@ -3,7 +3,7 @@
   "uniqueName": "welcome_message_plugin",
   "description": "Sends a personalized welcome message to new community members.",
   "triggers": ["membership-join"],
-  "permissions": ["read:space-data"],
+  "permissions": ["read:project-data", "read:room-data", "use:openai-message"],
   "outcomes": ["write:messages"],
   "tags": ["community", "room", "membership"],
   "projectStage": "early",

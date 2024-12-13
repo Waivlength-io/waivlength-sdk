@@ -1,16 +1,24 @@
 const triggers = require("./triggers");
 const customPluginRegistry = require("./customPluginRegistry");
 const { loadInternalPlugins } = require("./pluginLoader");
+const { validateManifest } = require("./pluginValidator");
+const { testPlugin } = require("./testRunner");
+const { getMockContext } = require("./mockData");
+const { createPlugin } = require("./pluginSetup");
+const { submitPlugin } = require("./submission");
 
-// Dynamically load and register all internal plugins
 loadInternalPlugins();
 
 module.exports = {
-  // Export getPluginsForTrigger directly
   getPluginsForTrigger: triggers.getPluginsForTrigger,
 
-  // Custom plugins functionality
   getCustomPluginsByNames: async (uniqueNames) => {
     return customPluginRegistry.getPluginsByNames(uniqueNames);
   },
+
+  createPlugin,
+  testPlugin,
+  submitPlugin,
+  validateManifest,
+  getMockContext,
 };

@@ -1,15 +1,49 @@
 # Welcome Message Plugin
 
-**Trigger:** `membership-join`  
+The **Welcome Message Plugin** is designed to send personalized and friendly greetings to new users when they join a room in your community. By leveraging OpenAI's capabilities, the plugin ensures a warm and engaging user experience.
 
-**Permissions:**
+## Features
 
-- `read:membership`: Access membershipInfo (membership type, userId, displayName).
-- `read:space-data`: Get space data (spaceName, spaceId).
-- `use:openai`: Generate messages via OpenAI.
+- Sends a personalized welcome message to new members.
 
-**Outcome:**
+- Automatically adapts messages based on the room's name and topic.
 
-- `write:messages`: Produces a text message to send to the space.
+- Fully customizable greeting logic powered by OpenAI.
 
-This plugin uses OpenAI to produce a personalized welcome message when a user joins the space.
+## How It Works
+
+The plugin triggers whenever a new member joins a room. It gathers the necessary information about the user, the room, and its topic to craft a personalized message using OpenAI's API.
+
+## Plugin Manifest
+
+### Basic Information
+
+- **Name:** Welcome Message Plugin
+
+- **Unique Name:** welcome_message_plugin
+
+- **Description:** Sends a personalized welcome message to new community members.
+
+- **Version:** 1.0.0
+
+- **Author:** Waivlength Core
+
+- **Project Stage:** Early
+
+- **Tags:** Community, Room, Membership
+
+### Permissions
+
+- **project-data**: Accesses space-level data.
+
+- **read:room-data**: Reads metadata about the room.
+
+- **use:openai-message**: Utilizes OpenAI API for message generation.
+
+### Triggers
+
+- **membership-join**: The plugin activates when a new user joins a room.
+
+### Outcomes
+
+- **write:messages**: Sends the crafted message to the room.

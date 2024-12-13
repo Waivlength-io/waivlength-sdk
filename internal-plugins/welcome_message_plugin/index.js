@@ -1,25 +1,41 @@
-const { generateOpenAIMessage } = require("../../utils/apiClients");
-
 module.exports = {
   manifest: require("./manifest.json"),
 
   /**
    * Executes the plugin logic.
-   * @param {object} context - Includes eventData, membershipInfo, spaceData, openAIClient if requested.
+   * @param {object} context
    */
   execute: async (context) => {
-    const { eventData, membershipInfo, spaceData, openAIClient } = context;
-    // Extract user and space info from context
-    const userId = membershipInfo?.userId || "Unknown User";
-    const spaceName = (spaceData && spaceData.spaceName) || "the space";
+    const { eventData, roomData } = context;
+    const userId = eventData.userId;
+    const roomName = roomData.roomName;
+    const roomTopic = roomData.roomTopic;
 
-    const prompt = `Welcome ${userId} to ${spaceName}! Please create a friendly, personalized greeting.`;
+    const prompt = `Please create a friendly, personalized greeting for the user with ID: ${userId}. They have joined the room "${roomName}", which is focused on the topic "${roomTopic}".`;
 
-    const generatedText = await generateOpenAIMessage(prompt);
+    const model = "gpt-4o-mini";
+    const maxTokens = 150;
+    const temperature = 0.8;
+    const presencePenalty = 0.6;
+    const frequencyPenalty = 0.4;
+    const systemRole =
+      "You are a friendly assistant designed to help welcome users to rooms.";
+
+    const openAIOptions = {
+      model,
+      maxTokens,
+      temperature,
+      presencePenalty,
+      frequencyPenalty,
+      systemRole,
+    };
+
+    const openAIResult = await context.openAIClient(prompt, openAIOptions);
 
     return {
       type: "write:messages",
-      content: generatedText,
+      content: openAIResult.content,
+      openAIResponse: openAIResult.rawData,
     };
   },
 };

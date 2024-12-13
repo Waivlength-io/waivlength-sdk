@@ -42,8 +42,6 @@ function loadInternalPlugins() {
       console.warn(`Skipping invalid plugin directory: ${pluginPath}`);
     }
   }
-
-  console.log(`Loaded Plugins: ${loadedPlugins.join(", ")}`);
   return loadedPlugins;
 }
 
