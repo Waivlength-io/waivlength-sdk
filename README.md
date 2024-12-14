@@ -13,7 +13,7 @@ Empower your Web3 project with AI-driven automation and dynamic integrations. Th
 ## Installation 📦
 
 ```bash
-npm install waivlength-sdk
+npm install waivlength-sdk@latest
 ```
 
 How It Works 🛠️
@@ -47,7 +47,7 @@ Contributing 🤝
 
 We welcome contributions from the community! If you'd like to contribute:
 
-1.  Fork the [Waivlength Plugin Starter](https://github.com/waivlength/waivlength-plugin-starter).
+1.  Fork the [Waivlength Plugin Starter](https://github.com/Waivlength-io/waivlength-plugin-starter).
 2.  Build and test your plugin.
 3.  Submit a pull request to the Waivlength SDK repository.
 
