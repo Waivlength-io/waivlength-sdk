@@ -3,7 +3,7 @@ const path = require("path");
 const { execSync } = require("child_process");
 const axios = require("axios");
 require("dotenv").config();
-const { testPlugin } = require("waivlength-sdk");
+const { testPlugin } = require("waivlength-plugins-sdk");
 
 const submitPlugin = async (pluginDir) => {
   try {
@@ -29,7 +29,7 @@ const submitPlugin = async (pluginDir) => {
     const commitMessage = `Add plugin: ${pluginName}`;
     const sdkRepo =
       process.env.SDK_REPO ||
-      "https://github.com/Waivlength-io/waivlength-sdk.git";
+      "https://github.com/Waivlength-io/waivlength-plugins-sdk.git";
     const githubToken = process.env.GITHUB_TOKEN;
 
     if (!githubToken) {

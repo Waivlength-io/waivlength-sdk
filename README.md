@@ -13,7 +13,7 @@ Empower your Web3 project with AI-driven automation and dynamic integrations. Th
 ## Installation 📦
 
 ```bash
-npm install waivlength-sdk@latest
+npm install waivlength-plugins-sdk@latest
 ```
 
 How It Works 🛠️
