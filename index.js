@@ -1,11 +1,11 @@
-const triggers = require("./triggers");
-const customPluginRegistry = require("./customPluginRegistry");
-const { loadInternalPlugins } = require("./pluginLoader");
-const { validateManifest } = require("./pluginValidator");
-const { testPlugin } = require("./testRunner");
-const { getMockContext } = require("./mockData");
-const { createPlugin } = require("./pluginSetup");
-const { submitPlugin } = require("./submission");
+const triggers = require("./utils/triggers");
+const customPluginRegistry = require("./utils/customPluginRegistry");
+const { loadInternalPlugins } = require("./utils/pluginLoader");
+const { validateManifest } = require("./tests/pluginValidator");
+const { testPlugin } = require("./tests/testRunner");
+const { getMockContext } = require("./tests/mockData");
+const { createPlugin } = require("./tests/pluginSetup");
+const { submitPlugin } = require("./tests/submission");
 
 loadInternalPlugins();
 
