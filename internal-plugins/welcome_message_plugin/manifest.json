@@ -1,12 +1,16 @@
 {
-  "name": "Welcome Message Plugin",
-  "uniqueName": "welcome_message_plugin",
-  "description": "Sends a personalized welcome message to new community members.",
+  "name": "Ask a Question Plugin",
+  "uniqueName": "ask_question_plugin",
+  "description": "Asks a thoughtful and engaging question to a user when triggered.",
   "triggers": ["membership-join"],
-  "permissions": ["read:project-data", "read:room-data", "use:openai-message"],
+  "permissions": [
+    "read:membership-join",
+    "read:room-data",
+    "use:openai-message"
+  ],
   "outcomes": ["write:messages"],
+  "version": "1.0.0",
+  "author": "Waivlength Team",
   "tags": ["community", "room", "membership"],
-  "projectStage": "early",
-  "author": "waivlength-core",
-  "version": "1.0.0"
+  "projectStage": "early"
 }

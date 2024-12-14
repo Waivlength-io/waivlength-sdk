@@ -5,7 +5,6 @@ const { validateManifest } = require("./tests/pluginValidator");
 const { testPlugin } = require("./tests/testRunner");
 const { getMockContext } = require("./tests/mockData");
 const { createPlugin } = require("./tests/pluginSetup");
-const { submitPlugin } = require("./tests/submission");
 
 loadInternalPlugins();
 
@@ -18,7 +17,6 @@ module.exports = {
 
   createPlugin,
   testPlugin,
-  submitPlugin,
   validateManifest,
   getMockContext,
 };
