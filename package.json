@@ -1,12 +1,13 @@
 {
   "name": "waivlength-sdk",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Waivlength's open-source AI-powered plugin framework, empowering Web3 projects with agent-driven automation.",
   "main": "index.js",
   "author": "nialloreilly95",
   "license": "MIT",
   "dependencies": {
     "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
     "fs-extra": "^11.2.0"
   }
 }
