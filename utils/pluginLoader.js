@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const triggers = require("./triggers");
 
-const internalPluginsPath = path.join(__dirname, "../internal-plugins");
+const internalPluginsPath = path.join(__dirname, "../../internal-plugins");
 
 /**
  * Dynamically loads and registers plugins from the internal-plugins directory.
