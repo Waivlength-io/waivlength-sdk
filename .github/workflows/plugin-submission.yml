@@ -1,0 +1,53 @@
+name: Plugin Submission Workflow
+
+on:
+  repository_dispatch:
+    types: [plugin_submission]
+
+jobs:
+  handle-submission:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Create a branch for the plugin
+      - name: Create Plugin Branch
+        run: |
+          PLUGIN_NAME="${{ github.event.client_payload.pluginName }}"
+          BRANCH_NAME="plugin-submission/$PLUGIN_NAME"
+          mkdir -p plugins/$PLUGIN_NAME
+          echo "Plugin Name: $PLUGIN_NAME" > plugins/$PLUGIN_NAME/README.md
+          git checkout -b $BRANCH_NAME
+          git add plugins
+          git commit -m "Add plugin: $PLUGIN_NAME"
+          git push origin $BRANCH_NAME
+
+      # Step 3: Create a pull request
+      - name: Create Pull Request
+        env:
+          BOT_GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --title "Plugin Submission: ${{ github.event.client_payload.pluginName }}" \
+            --body "### Plugin Details\n- Name: ${{ github.event.client_payload.pluginName }}\n- Version: ${{ github.event.client_payload.version }}" \
+            --base main \
+            --head plugin-submission/${{ github.event.client_payload.pluginName }}
+
+      # Step 4: Run Tests
+      - name: Run Plugin Tests
+        run: npm run test:plugins # Replace with your test command
+
+      # Step 5: Comment on PR with Results
+      - name: Comment on PR
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: "✅ Plugin tests passed! Ready for review."
+            })
