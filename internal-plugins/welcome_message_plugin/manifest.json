@@ -8,6 +8,5 @@
   "tags": ["community", "room", "membership"],
   "projectStage": "early",
   "author": "waivlength-core",
-  "version": "1.0.0",
-  "documentation_url": "https://github.com/Waivlength-io/waivlength-sdk/internal-plugins/welcome_message_plugin/README.md"
+  "version": "1.0.0"
 }

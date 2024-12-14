@@ -9,6 +9,8 @@ const createPlugin = (pluginDir) => {
     triggers: ["example-trigger"],
     permissions: [],
     outcomes: [],
+    tags: [],
+    projectStage: "early",
     version: "1.0.0",
     author: "Your Name",
   };
@@ -35,14 +37,25 @@ const createPlugin = (pluginDir) => {
     },
   ];
 
+  console.log("\n[INFO] Creating plugin structure...\n");
+
   files.forEach((file) => {
     const filePath = path.join(pluginDir, file.name);
     if (!fs.existsSync(filePath)) {
       fs.writeFileSync(filePath, file.content);
+      console.log(`✔ Created: ${file.name}`);
+    } else {
+      console.log(`⚠ Skipped (already exists): ${file.name}`);
     }
   });
 
-  console.log(`Plugin files created successfully in ${pluginDir}`);
+  console.log("\n[SUCCESS] Plugin files created successfully!");
+  console.log("\nNext Steps:");
+  console.log(
+    "1. Open the `manifest.json` file to configure your plugin's metadata."
+  );
+  console.log("2. Implement your plugin logic in `index.js`.");
+  console.log("3. Run `npm run test` to validate your plugin.\n");
 };
 
 module.exports = { createPlugin };

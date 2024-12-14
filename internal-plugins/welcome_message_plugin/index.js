@@ -16,8 +16,6 @@ module.exports = {
     const model = "gpt-4o-mini";
     const maxTokens = 150;
     const temperature = 0.8;
-    const presencePenalty = 0.6;
-    const frequencyPenalty = 0.4;
     const systemRole =
       "You are a friendly assistant designed to help welcome users to rooms.";
 
@@ -25,8 +23,6 @@ module.exports = {
       model,
       maxTokens,
       temperature,
-      presencePenalty,
-      frequencyPenalty,
       systemRole,
     };
 
