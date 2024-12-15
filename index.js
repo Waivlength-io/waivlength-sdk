@@ -4,8 +4,8 @@ const triggers = require("./utils/triggers");
 const customPluginRegistry = require("./utils/customPluginRegistry");
 
 // Paths for internal and community plugins
-const internalPluginsPath = path.join(__dirname, "../internal-plugins");
-const communityPluginsPath = path.join(__dirname, "../community-plugins");
+const internalPluginsPath = path.join(__dirname, "./internal-plugins");
+const communityPluginsPath = path.join(__dirname, "./community-plugins");
 
 // Load internal plugins
 function loadInternalPlugins() {
