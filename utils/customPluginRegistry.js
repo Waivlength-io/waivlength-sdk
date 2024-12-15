@@ -1,17 +1,11 @@
-// Hypothetical storage for custom plugins
 const customRegisteredPlugins = [];
 
-function registerCustomPlugin(plugin) {
-  customRegisteredPlugins.push(plugin);
-}
-
-function getPluginsByNames(uniqueNames) {
+function getPluginsByNames(pluginIds) {
   return customRegisteredPlugins.filter((plugin) =>
-    uniqueNames.includes(plugin.manifest.uniqueName)
+    pluginIds.includes(plugin.plugin_id)
   );
 }
 
 module.exports = {
-  registerCustomPlugin,
   getPluginsByNames,
 };
