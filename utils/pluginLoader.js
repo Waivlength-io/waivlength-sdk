@@ -16,15 +16,17 @@ function loadInternalPlugins() {
     const manifestPath = path.join(pluginPath, "manifest.json");
     const indexPath = path.join(pluginPath, "index.js");
 
-    // Ensure both manifest and index.js exist
+    // Ensure both manifest.json and index.js exist
     if (fs.existsSync(manifestPath) && fs.existsSync(indexPath)) {
       try {
         const manifest = require(manifestPath);
         const plugin = require(indexPath);
 
         // Validate required properties
-        if (!manifest.uniqueName || typeof plugin.execute !== "function") {
-          console.warn(`Invalid plugin in ${pluginPath}. Skipping.`);
+        if (!manifest.plugin_id || typeof plugin.execute !== "function") {
+          console.warn(
+            `Invalid plugin in ${pluginPath}. Missing 'plugin_id' or 'execute'. Skipping.`
+          );
           continue;
         }
 
@@ -34,7 +36,7 @@ function loadInternalPlugins() {
           execute: plugin.execute,
         });
 
-        loadedPlugins.push(manifest.uniqueName);
+        loadedPlugins.push(manifest.plugin_id); // Use plugin_id instead of uniqueName
       } catch (error) {
         console.error(`Error loading plugin from ${pluginPath}:`, error);
       }
@@ -42,6 +44,7 @@ function loadInternalPlugins() {
       console.warn(`Skipping invalid plugin directory: ${pluginPath}`);
     }
   }
+
   return loadedPlugins;
 }
 
