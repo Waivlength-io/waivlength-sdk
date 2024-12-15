@@ -1,6 +1,6 @@
 {
   "name": "waivlength-plugins-sdk",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Waivlength's open-source AI-powered plugin framework, empowering Web3 projects with agent-driven automation.",
   "main": "index.js",
   "author": "nialloreilly95",
