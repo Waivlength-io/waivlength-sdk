@@ -1,22 +1,26 @@
 const fs = require("fs");
 const path = require("path");
-const triggers = require("./triggers");
-
-const internalPluginsPath = path.join(__dirname, "../internal-plugins");
 
 /**
- * Dynamically loads and registers plugins from the internal-plugins directory.
+ * Dynamically loads and registers plugins from the specified directory.
+ * @param {string} pluginsPath - Path to the plugins directory.
+ * @param {function} registerPluginCallback - Callback to register the plugin.
+ * @returns {string[]} - List of successfully loaded plugin IDs.
  */
-function loadInternalPlugins() {
+function loadPluginsFromDirectory(pluginsPath, registerPluginCallback) {
   const loadedPlugins = [];
-  const pluginDirs = fs.readdirSync(internalPluginsPath);
+  if (!fs.existsSync(pluginsPath)) {
+    console.warn(`Plugins directory does not exist: ${pluginsPath}`);
+    return loadedPlugins;
+  }
+
+  const pluginDirs = fs.readdirSync(pluginsPath);
 
   for (const pluginDir of pluginDirs) {
-    const pluginPath = path.join(internalPluginsPath, pluginDir);
+    const pluginPath = path.join(pluginsPath, pluginDir);
     const manifestPath = path.join(pluginPath, "manifest.json");
     const indexPath = path.join(pluginPath, "index.js");
 
-    // Ensure both manifest.json and index.js exist
     if (fs.existsSync(manifestPath) && fs.existsSync(indexPath)) {
       try {
         const manifest = require(manifestPath);
@@ -31,12 +35,12 @@ function loadInternalPlugins() {
         }
 
         // Register the plugin
-        triggers.registerPlugin({
+        registerPluginCallback({
           manifest,
           execute: plugin.execute,
         });
 
-        loadedPlugins.push(manifest.plugin_id); // Use plugin_id instead of uniqueName
+        loadedPlugins.push(manifest.plugin_id); // Track loaded plugin IDs
       } catch (error) {
         console.error(`Error loading plugin from ${pluginPath}:`, error);
       }
@@ -48,6 +52,4 @@ function loadInternalPlugins() {
   return loadedPlugins;
 }
 
-module.exports = {
-  loadInternalPlugins,
-};
+module.exports = { loadPluginsFromDirectory };
